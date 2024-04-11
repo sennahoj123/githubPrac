@@ -16,7 +16,8 @@ jobs:
         run: pwd
 
       - name: build WAR
-        run: mvn package
+        run: mvn -B package --file pom.xml
+        working-direcory: ${{ github.workspace }}
 
       - name: list current directory
         run: ls -a
