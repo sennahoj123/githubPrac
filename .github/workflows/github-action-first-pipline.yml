@@ -29,5 +29,5 @@ jobs:
 
     - uses: actions/upload-artifact@v2
         with:
-        name: Package
-        path: artifact
+         name: Package
+         path: artifact
