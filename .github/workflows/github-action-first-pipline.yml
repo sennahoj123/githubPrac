@@ -12,6 +12,9 @@ jobs:
         with:
           ref: iede
 
+      - name: checkout repo
+        run: pwd
+
       - name: build WAR
         run: mvn package
 
