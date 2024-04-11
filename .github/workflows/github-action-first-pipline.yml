@@ -9,4 +9,4 @@ jobs:
     steps:
     
       - name: build WAR
-        run: mvn -B package --file pom.xml   
+        run: mvn clean package   
