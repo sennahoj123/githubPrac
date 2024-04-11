@@ -13,7 +13,7 @@ jobs:
           ref: iede
 
       - name: build WAR
-        run: mvn -B package --file pom.xml
+        run: mvn package
 
       - name: list current directory
         run: ls -a
