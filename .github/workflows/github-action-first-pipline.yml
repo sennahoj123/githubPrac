@@ -20,13 +20,13 @@ jobs:
   deploy-war:
     name: deploy WAR to tomcat
     runs-on: self-hosted
-    needs: build petclinic WAR
+    needs: maven-build
 
     steps:
-      - name: download artifect
+      - name: download artifact
         uses: actions/download-artifact@v4
         with:
           name: petclinic.war
-      - name: test artifect donwload
+      - name: test artifact download
         run: ls -R
 
