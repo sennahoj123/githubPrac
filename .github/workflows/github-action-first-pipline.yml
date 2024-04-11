@@ -3,28 +3,28 @@ on:
   push:
 
 jobs:
-  build-deploy:
-    name: build & deploy petclinic
+  maven-build:
+    name: build petclinic WAR
     runs-on: self-hosted
 
     steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-      - name: setup JDK 17
-        uses: actions/setup-java@v3
+      - name: package mvn
+        run: mvn clean package
+      - name: upload artifact
+        uses: actions/upload-artifact@v4
         with:
-          distribution: 'corretto'
-          java-version: 17
-          cache: maven
-      - name: Build with Maven
-        run: mvn compile
-      - name: Test with Maven
-        run: mvn test
-      - name: Package with maven
-        run: mvn package
-      - run: mkdir artifact && cp target/*.war artifact
-      - uses: actions/upload-artifact@v2
+          name: petclinic.war
+          path: target/*.war
+
+  deploy-war:
+    name: deploy WAR to tomcat
+    runs-on: self-hosted
+
+    steps:
+      - name: download .war
+        uses: actions/download-artifact@v4
         with:
-          name: Package
-          path: artifact
+          name: petclinic.war
+      - name: copy WAR to webapps folder
+        run: cp target/petclinic.war /opt/tomcat/webapps/
 
